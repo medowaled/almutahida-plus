@@ -65,9 +65,9 @@
   <!-- الهيدر وشريط التنقل الرئيسي -->
   <header class="site-header">
     <div class="container nav-container">
-      <a href="index.html" class="brand-logo">
+      <a href="index.html" class="brand-logo" aria-label="الصفحة الرئيسية لشركة المتحدة بلس">
         <div class="header-logo-badge">
-          <img src="images/logo-icon.webp" alt="لوجو شركة المتحدة بلس">
+          <img src="images/logo-icon.webp" alt="لوجو شركة المتحدة بلس" width="46" height="46">
         </div>
         <div class="brand-info">
           <div class="brand-name">المتحدة <span>بلس</span></div>
@@ -78,19 +78,89 @@
         </div>
       </a>
 
-      <nav class="nav-menu">
-        <a href="index.html" class="nav-link">الرئيسية</a>
-        <a href="products.html" class="nav-link active">منتجاتنا</a>
-        <a href="index.html#why-us" class="nav-link">ليه تختارنا</a>
-        <a href="index.html#partners" class="nav-link">شركاء النجاح</a>
-        <a href="index.html#reviews" class="nav-link">آراء العملاء</a>
-        <a href="contact.html" class="nav-link">اتصل بنا</a>
+      <!-- روابط القائمة الرئيسية وشاشات الموبايل -->
+      <nav class="nav-menu" id="navMenu">
+        <div class="nav-menu-header">
+          <div class="nav-menu-brand">
+            <img src="images/logo-icon.webp" alt="المتحدة بلس" width="34" height="34">
+            <span>المتحدة <strong>بلس</strong></span>
+          </div>
+          <button class="nav-menu-close" id="navMenuClose" aria-label="إغلاق القائمة">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="nav-menu-links">
+          <a href="index.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>الرئيسية</span>
+          </a>
+          <a href="products.html" class="nav-link active">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span>منتجاتنا</span>
+          </a>
+          <a href="index.html#why-us" class="nav-link">
+            <i class="fa-solid fa-award"></i>
+            <span>ليه تختارنا</span>
+          </a>
+          <a href="index.html#partners" class="nav-link">
+            <i class="fa-solid fa-handshake"></i>
+            <span>شركاء النجاح</span>
+          </a>
+          <a href="index.html#reviews" class="nav-link">
+            <i class="fa-solid fa-star"></i>
+            <span>آراء العملاء</span>
+          </a>
+          <a href="contact.html" class="nav-link">
+            <i class="fa-solid fa-phone-volume"></i>
+            <span>اتصل بنا</span>
+          </a>
+        </div>
+
+        <!-- صندوق التواصل والاتصال السريع داخل القائمة الجانبية -->
+        <div class="nav-menu-contact-box">
+          <div class="nav-contact-title">
+            <i class="fa-solid fa-headset"></i>
+            <span>قسم المبيعات والتعاقدات</span>
+          </div>
+          <div class="nav-contact-btns">
+            <a href="tel:01011380713" class="nav-contact-btn tel">
+              <div class="nav-contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="nav-contact-info">
+                <span>خط المبيعات 1</span>
+                <strong>01011380713</strong>
+              </div>
+              <span class="nav-contact-badge">اتصال</span>
+            </a>
+            <a href="tel:01017228139" class="nav-contact-btn tel">
+              <div class="nav-contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="nav-contact-info">
+                <span>خط المبيعات 2</span>
+                <strong>01017228139</strong>
+              </div>
+              <span class="nav-contact-badge">اتصال</span>
+            </a>
+            <div class="nav-wa-row">
+              <a href="https://wa.me/201011380713" target="_blank" class="nav-wa-btn" title="محادثة واتساب 1">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>واتساب 1</span>
+              </a>
+              <a href="https://wa.me/201017228139" target="_blank" class="nav-wa-btn" title="محادثة واتساب 2">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>واتساب 2</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </nav>
+
+      <!-- خلفية معتمة للقائمة عند الفتح بالموبايل -->
+      <div class="nav-backdrop" id="navBackdrop"></div>
 
       <!-- زر الاتصال المميز في الهيدر (يدعم الرقمين والواتساب) -->
       <div class="header-actions">
         <div class="header-phone-dropdown">
-          <button class="btn-phone-distinct phone-dropdown-trigger" type="button" aria-expanded="false" aria-label="أرقام المبيعات والاتصال">
+          <button class="btn-phone-distinct phone-dropdown-trigger" type="button" aria-expanded="false" aria-label="أرقام المبيعات والاتصال السريع">
             <div class="phone-icon-pulse">
               <i class="fa-solid fa-phone"></i>
             </div>
@@ -101,6 +171,7 @@
                 <span class="phone-divider">•</span>
                 <span>01017228139</span>
               </span>
+              <span class="phone-mobile-label">المبيعات</span>
             </div>
             <i class="fa-solid fa-chevron-down phone-drop-arrow"></i>
           </button>
@@ -115,7 +186,7 @@
                 <i class="fa-solid fa-phone"></i>
               </div>
               <div class="phone-drop-info">
-                <span class="phone-drop-label">خط المبيعات 1</span>
+                <span class="phone-drop-label">خط المبيعات الرئيسي 1</span>
                 <span class="phone-drop-number">01011380713</span>
               </div>
               <span class="phone-drop-badge">اتصال مباشر</span>
@@ -125,7 +196,7 @@
                 <i class="fa-solid fa-phone"></i>
               </div>
               <div class="phone-drop-info">
-                <span class="phone-drop-label">خط المبيعات 2</span>
+                <span class="phone-drop-label">خط المبيعات الرئيسي 2</span>
                 <span class="phone-drop-number">01017228139</span>
               </div>
               <span class="phone-drop-badge">اتصال مباشر</span>
@@ -141,7 +212,7 @@
           </div>
         </div>
 
-        <button class="mobile-toggle" aria-label="فتح القائمة">
+        <button class="mobile-toggle" id="mobileToggle" aria-label="فتح القائمة الرئيسية">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>

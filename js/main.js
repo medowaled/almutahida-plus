@@ -52,6 +52,15 @@ function initPhoneDropdown() {
       });
     }
   });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdowns.forEach(d => {
+        d.classList.remove('active');
+        d.querySelector('.phone-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 }
 
 /* --------------------------------------------------------------------------
@@ -71,27 +80,72 @@ function initHeaderScroll() {
 }
 
 /* --------------------------------------------------------------------------
-   قائمة الموبايل (Mobile Drawer)
+   قائمة الموبايل الجانبية التفاعلية (Mobile Navigation Drawer & Backdrop)
    -------------------------------------------------------------------------- */
 function initMobileMenu() {
   const toggleBtn = document.querySelector('.mobile-toggle');
   const navMenu = document.querySelector('.nav-menu');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const closeBtn = document.querySelector('.nav-menu-close');
+  const backdrop = document.querySelector('.nav-backdrop');
+  const interactiveLinks = document.querySelectorAll('.nav-link, .nav-contact-btn, .nav-wa-btn');
 
   if (!toggleBtn || !navMenu) return;
 
-  toggleBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('open');
-    const isOpen = navMenu.classList.contains('open');
-    toggleBtn.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+  function openMenu() {
+    navMenu.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    toggleBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    navMenu.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+    toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (navMenu.classList.contains('open')) {
+      closeMenu();
+    } else {
+      closeMenuDropdowns();
+      openMenu();
+    }
   });
 
-  navLinks.forEach(link => {
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeMenu);
+  }
+
+  interactiveLinks.forEach(link => {
     link.addEventListener('click', () => {
-      navMenu.classList.remove('open');
-      toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      closeMenu();
     });
   });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMenu();
+    }
+  });
+
+  function closeMenuDropdowns() {
+    document.querySelectorAll('.header-phone-dropdown').forEach(d => {
+      d.classList.remove('active');
+      d.querySelector('.phone-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+    });
+  }
 }
 
 /* --------------------------------------------------------------------------
